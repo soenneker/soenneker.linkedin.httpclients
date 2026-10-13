@@ -29,7 +29,7 @@ public sealed class LinkedInOpenApiHttpClient : ILinkedInOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(LinkedInOpenApiHttpClient), (config: _config, baseUrl: _config["LinkedIn:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("LinkedIn:AccessToken");
+            var apiKey = state.config.GetStringStrict("LinkedIn:AccessToken");
             string authHeaderName = state.config["LinkedIn:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["LinkedIn:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
